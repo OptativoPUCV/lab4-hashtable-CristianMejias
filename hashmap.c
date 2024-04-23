@@ -70,11 +70,18 @@ void enlarge(HashMap * map) {
 
 
 HashMap * createMap(long capacity) {
+  //1) Reservar memoria para el hashmap
   HashMap *nuevoHashMap = (HashMap *) malloc(sizeof(HashMap));
-  if (nuevoHashMap == NULL)
-    exit(EXIT_FAILURE);
+  if (nuevoHashMap == NULL) exit(EXIT_FAILURE);
   
-  nuevoHashMap->buckets = NULL;
+  //2) Reservar memoria para cada bucket
+  nuevoHashMap->buckets = (Pair**) malloc(capacity * sizeof(Pair*));
+  
+  //3) Recorrer cada bucket para NULL
+  for (long i = 0 ; i < capacity ; i++)
+    nuevoHashMap->buckets[i] = NULL;
+
+  //4) Inicializar datos hashmap
   nuevoHashMap->size = 0;
   nuevoHashMap->capacity = capacity;
   nuevoHashMap->current = -1;
