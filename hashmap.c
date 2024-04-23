@@ -52,7 +52,7 @@ void insertMap(HashMap * map, char * key, void * value) {
   long pos = hash(key, map->capacity);
 
   //2) comprobar que posicion es valida
-  while (map->buckets[pos] != NULL && !is_equal(map->buckets[pos]->key, "-1")){
+  while (map->buckets[pos] != NULL){
     //3) Como posicion no valida resolvemos colision
     pos = (pos + 1) % map->capacity;
   }
