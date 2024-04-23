@@ -120,3 +120,12 @@ hashmap.c:116:3: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__at
       |   ^
 Compilation failed
 48d8b86
+Tue 23 Apr 2024 02:13:03 PM UTC: 
+ hashmap.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+In file included from test.c:4:
+hashmap.c:116:3: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘-’ token
+  116 | b - Si la clave no se encuentra avance hasta encontrarla (método de resolución de colisiones)
+      |   ^
+Compilation failed
+01f1453

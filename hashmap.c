@@ -104,7 +104,7 @@ Pair * searchMap(HashMap * map,  char * key) {
   while (1){
     if (map->buckets[pos] == NULL)
       return NULL;
-    else if (is_equal(map->buckets[pos]->key, key)
+    else if (is_equal(map->buckets[pos]->key, key))
       return map->buckets[pos];
     else
       pos = (pos + 1) % map->capacity;
