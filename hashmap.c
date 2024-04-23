@@ -92,15 +92,16 @@ void enlarge(HashMap * map) {
 
   //4) Recorrer el antiguo arreglo para reinsertar elementos
   for (int i = 0; i < antiguaCapacidad; i++){
+    //5) Comprobar que existen datos en esa posicion
     if (antiguoArreglo[i] != NULL)
     {
+      //6) Insertar en el nuevo espacio
       insertMap(map, antiguoArreglo[i]->key, antiguoArreglo[i]->value);
       free(antiguoArreglo[i]);
     }
   }
-
+  //7) Liberar memoria de arreglo antiguo
   free(antiguoArreglo);
-  
 }
 
 
