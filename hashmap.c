@@ -53,8 +53,6 @@ void enlarge(HashMap * map) {
 
 HashMap * createMap(long capacity) {
   HashMap *nuevoHashMap = (HashMap *) malloc(sizeof(HashMap));
-  if (nuevoHashMap == NULL)
-    exit(EXIT_FAILURE);
   
   nuevoHashMap->buckets = NULL;
   nuevoHashMap->size = 0;
