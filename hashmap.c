@@ -94,6 +94,10 @@ HashMap * createMap(long capacity) {
 void eraseMap(HashMap * map,  char * key) {
   //1) Funcion para encontra posicion
   Pair *PairEliminar = searchMap(map, key);
+  //2) comprobar que el elemento se encontro
+  if (PairEliminar == NULL)
+    return;
+  //3) Volver nula esa posicion
   PairEliminar->key = NULL;
 
   (map->size)--; 
