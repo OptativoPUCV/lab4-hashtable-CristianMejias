@@ -102,6 +102,7 @@ Pair * searchMap(HashMap * map,  char * key) {
 
   //2) Buscar dato en esa posicion
   while (1){
+    map->current = pos;
     if (map->buckets[pos] == NULL)
       return NULL;
     else if (is_equal(map->buckets[pos]->key, key))
