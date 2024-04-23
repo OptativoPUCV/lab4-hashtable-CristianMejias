@@ -16,6 +16,14 @@ struct HashMap {
     long current; //indice del ultimo dato accedido
 };
 
+/*
+struct Pair {
+  char * key;
+  void * value;
+};
+*/
+
+
 Pair * createPair( char * key,  void * value) {
     Pair * new = (Pair *)malloc(sizeof(Pair));
     new->key = key;
@@ -40,19 +48,31 @@ int is_equal(void* key1, void* key2){
 
 
 void insertMap(HashMap * map, char * key, void * value) {
+  //1) obtener posicion mediante funcion hash
+  long pos = hash(key, map->capacity);
 
+  //2) comprobar que posicion es valida
+  if (map->buckets[pos] == NULL || is_equal(map->buckets[pos]->key,"-1")){
+    //3) Agregar nuevo elemento
+    Pair *nuevoDato = createPair(key, value);
+    map->buckets[pos] = nuevoDato;
+    //4) Modificar datos mapa
+    map->size += 1;
+    map->current += pos;
+  }
+  
 
 }
 
 void enlarge(HashMap * map) {
     enlarge_called = 1; //no borrar (testing purposes)
-
-
 }
 
 
 HashMap * createMap(long capacity) {
   HashMap *nuevoHashMap = (HashMap *) malloc(sizeof(HashMap));
+  if (nuevoHashMap == NULL)
+    exit(EXIT_FAILURE);
   
   nuevoHashMap->buckets = NULL;
   nuevoHashMap->size = 0;
