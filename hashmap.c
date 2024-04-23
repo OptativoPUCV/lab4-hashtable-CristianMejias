@@ -31,6 +31,8 @@ Pair * createPair( char * key,  void * value) {
     return new;
 }
 
+
+
 long hash( char * key, long capacity) {
     unsigned long hash = 0;
      char * ptr;
@@ -40,11 +42,14 @@ long hash( char * key, long capacity) {
     return hash%capacity;
 }
 
+
+
 int is_equal(void* key1, void* key2){
     if(key1==NULL || key2==NULL) return 0;
     if(strcmp((char*)key1,(char*)key2) == 0) return 1;
     return 0;
 }
+
 
 
 void insertMap(HashMap * map, char * key, void * value) {
@@ -67,9 +72,37 @@ void insertMap(HashMap * map, char * key, void * value) {
   map->current = pos;
 }
 
+
+
+
 void enlarge(HashMap * map) {
-    enlarge_called = 1; //no borrar (testing purposes)
+  enlarge_called = 1; //no borrar (testing purposes)
+
+  //1) Crea una referencia auxiliar para el antiguo arreglo
+  long antiguaCapacidad = map->capacity;
+  Pair **antiguoArreglo = map->buckets;
+
+  //2) Aumenta la capacidad
+  long nuevaCapacidad = 2 * antiguaCapacidad;
+  map->capacity = nuevaCapacidad;
+
+  //3) Reserva memoria y asigna el arreglo vacio
+  map->buckets = (Pair**)calloc(nuevaCapacidad, sizeof(Pair*));
+  map->size = 0;
+
+  //4) Recorrer el antiguo arreglo para reinsertar elementos
+  for (int i = 0; i < antiguaCapacidad; i++){
+    if (antiguoArreglo[i] != NULL)
+    {
+      insertMap(map, antiguoArreglo[i]->key, antiguoArreglo[i]->value);
+      free(antiguoArreglo[i]);
+    }
+  }
+
+  free(antiguoArreglo);
+  
 }
+
 
 
 HashMap * createMap(long capacity) {
@@ -92,6 +125,9 @@ HashMap * createMap(long capacity) {
   return nuevoHashMap;
 }
 
+
+
+
 void eraseMap(HashMap * map,  char * key) {
   //1) Funcion para encontra posicion
   Pair *PairEliminar = searchMap(map, key);
@@ -106,6 +142,9 @@ void eraseMap(HashMap * map,  char * key) {
   //4) Disminuir tamaño
   (map->size)--; 
 }
+
+
+
 
 Pair * searchMap(HashMap * map,  char * key) {
   //1) Funcion hash para encontrar posicion
@@ -127,26 +166,38 @@ Pair * searchMap(HashMap * map,  char * key) {
   }
 }
 
+
+
 Pair * firstMap(HashMap * map) {
+  //1) Recorro todas las posiciones desde la primera
   for (long i = 0 ; i < map->capacity ; i++)
   {
+    //2) compruebo que sea posicion valida
     if (map->buckets[i] != NULL && map->buckets[i]->key != NULL)
     {
+      //Si es valida actualizo el current y reporno pair
       map->current = i;
       return map->buckets[i];
     }
   }
+  //4) Si no encontro ningun elemento valido retorna null
   return NULL;
 }
 
+
+
 Pair * nextMap(HashMap * map) {
+  //1) Recorro todas las posiciones desde el siguiente al current
   for (long i = map->current + 1 ; i < map->capacity ; i++)
   {
+    //2) compruebo que sea posicion valida
     if (map->buckets[i] != NULL && map->buckets[i]->key != NULL)
     {
+      //Si es valida actualizo el current y reporno pair
       map->current = i;
       return map->buckets[i];
     }
   }
+  //4) Si no encontro ningun elemento valido retorna null
   return NULL;
 }
