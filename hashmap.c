@@ -91,9 +91,12 @@ HashMap * createMap(long capacity) {
   return nuevoHashMap;
 }
 
-void eraseMap(HashMap * map,  char * key) {    
+void eraseMap(HashMap * map,  char * key) {
+  //1) Funcion para encontra posicion
+  Pair *DatoEliminar = searchMap(map, key);
+  DatoEliminar = NULL;
 
-
+  (map->size)--; 
 }
 
 Pair * searchMap(HashMap * map,  char * key) {
@@ -106,10 +109,10 @@ Pair * searchMap(HashMap * map,  char * key) {
     //3) Si la posicion es nula el dato no existe
     if (map->buckets[pos] == NULL)
       return NULL;
-    //Si el dato esta en la posicion lo retorno
+    //4) Si el dato esta en la posicion lo retorno
     else if (is_equal(map->buckets[pos]->key, key))
       return map->buckets[pos];
-    //Si el datro no esta en la posicion (Colisdion) lo maneja
+    //5) Si el datro no esta en la posicion (Colisdion) lo maneja
     else
       pos = (pos + 1) % map->capacity;
   }
