@@ -93,8 +93,8 @@ HashMap * createMap(long capacity) {
 
 void eraseMap(HashMap * map,  char * key) {
   //1) Funcion para encontra posicion
-  Pair *DatoEliminar = searchMap(map, key);
-  DatoEliminar = NULL;
+  Pair *PairEliminar = searchMap(map, key);
+  PairEliminar->key = NULL;
 
   (map->size)--; 
 }
