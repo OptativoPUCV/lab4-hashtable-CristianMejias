@@ -96,11 +96,29 @@ void eraseMap(HashMap * map,  char * key) {
 
 }
 
-Pair * searchMap(HashMap * map,  char * key) {   
+Pair * searchMap(HashMap * map,  char * key) {
+  //1) Funcion hash para encontrar posicion
+  long pos = hash(key, map->capacity);
 
-
-    return NULL;
+  //2) Buscar dato en esa posicion
+  while (1){
+    if (map->buckets[pos] == NULL)
+      return NULL;
+    else if (is_equal(map->buckets[pos]->key, key)
+      return map->buckets[pos];
+    else
+      pos = (pos + 1) % map->capacity;
+  }
 }
+
+
+
+b - Si la clave no se encuentra avance hasta encontrarla (método de resolución de colisiones)
+
+c - Si llega a una casilla nula, retorne NULL inmediatamente (no siga avanzando, la clave no está)
+
+Recuerde actualizar el índice current a la posición encontrada. Recuerde que el arreglo es circular.
+
 
 Pair * firstMap(HashMap * map) {
 
