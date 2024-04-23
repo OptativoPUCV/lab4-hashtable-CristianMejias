@@ -111,15 +111,6 @@ Pair * searchMap(HashMap * map,  char * key) {
   }
 }
 
-
-
-b - Si la clave no se encuentra avance hasta encontrarla (método de resolución de colisiones)
-
-c - Si llega a una casilla nula, retorne NULL inmediatamente (no siga avanzando, la clave no está)
-
-Recuerde actualizar el índice current a la posición encontrada. Recuerde que el arreglo es circular.
-
-
 Pair * firstMap(HashMap * map) {
 
     return NULL;
