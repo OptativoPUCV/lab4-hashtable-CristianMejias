@@ -55,7 +55,6 @@ void insertMap(HashMap * map, char * key, void * value) {
   while (map->buckets[pos] != NULL && !is_equal(map->buckets[pos]->key, "-1")){
     //3) Como posicion no valida resolvemos colision
     pos = (pos + 1) % map->capacity;
-    }
   }
   
   //4) Agregar nuevo elemento
