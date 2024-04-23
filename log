@@ -44,3 +44,28 @@ Tue 23 Apr 2024 01:54:13 PM UTC:
  tests:  2|5
 total_score: 20/70
 effe5b1
+Tue 23 Apr 2024 01:57:48 PM UTC: 
+ hashmap.c | 8 +++-----
+ 1 file changed, 3 insertions(+), 5 deletions(-)
+In file included from test.c:4:
+hashmap.c:62:32: error: ‘key’ undeclared here (not in a function); did you mean ‘key_t’?
+   62 |   Pair *nuevoDato = createPair(key, value);
+      |                                ^~~
+      |                                key_t
+hashmap.c:62:37: error: ‘value’ undeclared here (not in a function)
+   62 |   Pair *nuevoDato = createPair(key, value);
+      |                                     ^~~~~
+hashmap.c:63:6: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘->’ token
+   63 |   map->buckets[pos] = nuevoDato;
+      |      ^~
+hashmap.c:66:6: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘->’ token
+   66 |   map->size += 1;
+      |      ^~
+hashmap.c:67:6: error: expected ‘=’, ‘,’, ‘;’, ‘asm’ or ‘__attribute__’ before ‘->’ token
+   67 |   map->current = pos;
+      |      ^~
+hashmap.c:68:1: error: expected identifier or ‘(’ before ‘}’ token
+   68 | }
+      | ^
+Compilation failed
+d4d8d34

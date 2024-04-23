@@ -52,14 +52,12 @@ void insertMap(HashMap * map, char * key, void * value) {
   long pos = hash(key, map->capacity);
 
   //2) comprobar que posicion es valida
-  if (!(map->buckets[pos] == NULL || is_equal(map->buckets[pos]->key,"-1"))){
+  while (map->buckets[pos] != NULL && !is_equal(map->buckets[pos]->key, key)){
     //3) Como posicion no valida resolvemos colision
-    long contador = 0;
-    while (contador < map->capacity) {
-      pos++;
-      contador++;
+    pos = (pos + 1) % map->capacity;
     }
   }
+  
   //4) Agregar nuevo elemento
   Pair *nuevoDato = createPair(key, value);
   map->buckets[pos] = nuevoDato;
