@@ -53,6 +53,7 @@ void insertMap(HashMap * map, char * key, void * value) {
 
   //2) comprobar que posicion es valida
   while (map->buckets[pos] != NULL){
+    
     //3) Como posicion no valida resolvemos colision
     pos = (pos + 1) % map->capacity;
   }
@@ -94,12 +95,15 @@ HashMap * createMap(long capacity) {
 void eraseMap(HashMap * map,  char * key) {
   //1) Funcion para encontra posicion
   Pair *PairEliminar = searchMap(map, key);
+  
   //2) comprobar que el elemento se encontro
   if (PairEliminar == NULL)
     return;
+  
   //3) Volver nula esa posicion
   PairEliminar->key = NULL;
-
+  
+  //4) Disminuir tamaño
   (map->size)--; 
 }
 
@@ -110,6 +114,7 @@ Pair * searchMap(HashMap * map,  char * key) {
   while (1){
     //2) Actualizar current
     map->current = pos;
+    
     //3) Si la posicion es nula el dato no existe
     if (map->buckets[pos] == NULL)
       return NULL;
